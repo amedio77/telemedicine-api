@@ -48,21 +48,24 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clients.inMemory()
                 .withClient("crmClient1")
                 .secret(password)
-                .authorizedGrantTypes("password", "refresh_token")
+                .authorizedGrantTypes("password", "refresh_token","authorization_code")
                 .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
                 .scopes("read", "write", "trust")
                 .accessTokenValiditySeconds(ONE_DAY)
                 //.accessTokenValiditySeconds(300)
-                .refreshTokenValiditySeconds(THIRTY_DAYS);
+                .refreshTokenValiditySeconds(THIRTY_DAYS)
+                .and()
+                .withClient("crmClient-redirect")
+                .secret(password)
+                .authorizedGrantTypes("authorization_code")
+                .authorities("ROLE_CLIENT") .scopes("read", "trust")
+                .resourceIds("sparklr")
+                .redirectUris("http://localhost:8080");
+
     }
-/*
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        System.out.println("AuthorizationServerConfig configure  endpoints");
-        endpoints.tokenStore(tokenStore).userApprovalHandler(userApprovalHandler)
-                .authenticationManager(authenticationManager);
-    }
-*/
+
+    // 인증 서버 token 발급 부분 설정
+    // 사용자 정의 USER 테이블의 정보를 가지고 인증하여 토큰 발급 crmUserDetailsService
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.tokenStore(tokenStore).userApprovalHandler(userApprovalHandler)
@@ -70,9 +73,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .userDetailsService(crmUserDetailsService);
     }
 
+
+     // 토큰 발급시 관리
+     // 보안 관리하는 부분
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-        System.out.println("AuthorizationServerConfig configure oauthServer");
         oauthServer.realm(REALM);
     }
 }
