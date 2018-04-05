@@ -53,7 +53,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .scopes("read", "write", "trust")
                 .accessTokenValiditySeconds(ONE_DAY)
                 //.accessTokenValiditySeconds(300)
-                .refreshTokenValiditySeconds(THIRTY_DAYS)
+                .refreshTokenValiditySeconds(THIRTY_DAYS);
+                /*
                 .and()
                 .withClient("crmClient-redirect")
                 .secret(password)
@@ -61,6 +62,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .authorities("ROLE_CLIENT") .scopes("read", "trust")
                 .resourceIds("sparklr")
                 .redirectUris("http://localhost:8080");
+                */
 
     }
 

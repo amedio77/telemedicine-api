@@ -1,0 +1,32 @@
+[
+                {
+                        "destination": "0.0.0.0-10.255.255.255",
+                        "protocol": "all"
+                },
+                {
+                        "destination": "11.0.0.0-169.253.255.255",
+                        "protocol": "all"
+                },
+                {
+                        "destination": "169.255.0.0-172.15.255.255",
+                        "protocol": "all"
+                },
+                {
+                        "destination": "172.32.0.0-192.167.255.255",
+                        "protocol": "all"
+                },
+                {
+                        "destination": "192.169.0.0-255.255.255.255",
+                        "protocol": "all"
+                },
+                {
+                        "destination": "211.239.0.0-211.239.255.255",
+                        "ports": "1-30000",
+                        "protocol": "tcp"
+                },
+                {
+                        "destination": "34.203.0.0-34.203.255.255",
+                        "ports": "1-30000",
+                        "protocol": "tcp"
+                }
+        ]

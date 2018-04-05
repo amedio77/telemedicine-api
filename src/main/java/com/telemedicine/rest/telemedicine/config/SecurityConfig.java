@@ -66,6 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     @Order(Ordered.HIGHEST_PRECEDENCE)
     protected void configure(HttpSecurity http) throws Exception {
+
         http
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -74,6 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //.antMatchers("/about").permitAll()
                 //.antMatchers("/signup").permitAll()
+                .antMatchers("/greeting").permitAll()
                 .antMatchers("/oauth/token").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/api/**").hasRole("USER")
@@ -81,6 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic()
                 .realmName("CRM_REALM");
+
     }
 
 
