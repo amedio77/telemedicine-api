@@ -48,7 +48,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clients.inMemory()
                 .withClient("crmClient1")
                 .secret(password)
-                .authorizedGrantTypes("password", "refresh_token","authorization_code")
+                .authorizedGrantTypes("password", "refresh_token")
                 .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
                 .scopes("read", "write", "trust")
                 .accessTokenValiditySeconds(ONE_DAY)
