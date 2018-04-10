@@ -26,6 +26,13 @@ import org.springframework.security.oauth2.provider.request.DefaultOAuth2Request
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+import org.springframework.security.web.session.SessionManagementFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.CorsUtils;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -67,19 +74,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     protected void configure(HttpSecurity http) throws Exception {
 
-        http
+        http    .cors().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
                 //.antMatchers("/about").permitAll()
-                //.antMatchers("/signup").permitAll()
+                .antMatchers("/").permitAll()
+                .antMatchers("/favicon.ico").permitAll()
                 .antMatchers("/oauth/token").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .antMatchers("/api/**").hasRole("USER")
-                .anyRequest().authenticated()
-                .and()
+                .anyRequest().authenticated().and()
                 .httpBasic()
                 .realmName("CRM_REALM");
 
@@ -118,4 +125,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin("*");
+        configuration.addAllowedMethod("*");
+        configuration.addAllowedHeader("*");
+        configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 }

@@ -13,7 +13,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		//-- define URL patterns to enable OAuth2 security
-
+        //OAuth 인증을 받도록 하는 역할
 		http.
 				anonymous().disable()
 				.requestMatchers().antMatchers("/api/**")

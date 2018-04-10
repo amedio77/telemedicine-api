@@ -7,22 +7,19 @@
     <script>
         function getToken(){
             $.ajax({
-                url: "https://telemedicine-api-delightful-roan.34.203.146.2.xip.io/",
-               //   url: "http://localhost:8080/oauth/token",
+                url: "http://telemedicine-api-delightful-roan.34.203.146.2.xip.io/",
+                //  url: "http://localhost:8080/oauth/token",
                 type:"POST"
                 , dataType : "json"
                // , jsonp : "jsonp"
                 , contentType : "application/json"
-                , crossDomain: true,
-                    xhrFields: {
-                        withCredentials: true
-                    }
+               // crossDomain:true,
                 , headers: {  'Authorization': 'Basic Y3JtQ2xpZW50MTpjcm1TdXBlclNlY3JldA==',
                             'Cache-Control': 'no-cache',
                             'Content-Type' : 'application/x-www-form-urlencoded',
                             "Access-Control-Allow-Origin": "*"
                             ,"Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
-                            ,"Access-Control-Allow-Headers": "origin, x-requested-with, content-type, accept"
+                           // ,"Access-Control-Allow-Headers": "origin, x-requested-with, content-type, accept"
                 },
                 data: {'username': "do", 'password': "1234",'grant_type': "password"}
             }).then(function(data) {
