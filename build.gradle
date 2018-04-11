@@ -23,6 +23,9 @@ group = 'com.telemedicine.rest'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
+bootRun {
+	addResources = true
+}
 
 bootJar {
 	baseName = 'gs-rest-service-cors'
@@ -49,7 +52,8 @@ dependencies {
 	compile('org.springframework.data:spring-data-rest-hal-browser')
 	compile('org.projectlombok:lombok')
 	//runtime('mysql:mysql-connector-java')
-	//compile 'mysql:mysql-connector-java'
+	//compile ('mysql:mysql-connector-java')
+	//compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.9-rc'
 	// https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
 	compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '6.1.0.jre7'
 
