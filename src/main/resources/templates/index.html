@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Getting Started: Serving Web Content</title>
-    <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="jquery.jsonPresenter.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -13,9 +13,10 @@
 
     <script>
         function getToken() {
+            var hostname = window.location.origin;
             $.ajax({
                 // url: "https://telemedicine-api-delightful-roan.34.203.146.2.xip.io/",
-                url: "http://localhost:8080/oauth/token",
+                url: hostname+"/oauth/token",
                 type: "POST"
                 , dataType: "json"
                 // , jsonp : "jsonp"
@@ -100,7 +101,7 @@
                     <input type="password" class="form-control" id="userpw" value="1234">
                 </div>
                 <div class="form-group">
-                    <label for="userpw">Token</label>
+                    <label for="userpw">Access Token</label>
                     <input type="text" class="form-control" name="stoken" id="stoken" >
                 </div>
                 <div class="form-group">
@@ -110,9 +111,15 @@
                     <div class="input-group mb-3">
                         <select class="custom-select" id="apiid" onchange="setUrl()">
                             <option selected>Choose...</option>
-                            <option value="/api/member">/api/member</option>
-                            <option value="/api/member">/api/member</option>
-                            <option value="/api/member">/api/member</option>
+                            <option value="/api">OPEN API Repository 목록</option>
+                            <option value="/api/member">회원정보</option>
+                            <option value="/api/telemedicines">원격진료정보</option>
+                            <option value="/api/lifelogca">크로이드 스마트밴드 활동량</option>
+                            <option value="/api/lifelogca250">크로이드 스마트밴드 활동량 250</option>
+                            <option value="/api/lifelogcs">크로이드 스마트밴드 수면</option>
+                            <option value="/api/lifelogcs250">크로이드 스마트밴드 수면 250</option>
+                            <option value="/api/lifelogrb">리본혈당</option>s
+                            <option value="/api/lifelogbb">보령협압</option>
                         </select>
                         <div class="input-group-append">
                             <label class="input-group-text" for="apiid" >API</label>
