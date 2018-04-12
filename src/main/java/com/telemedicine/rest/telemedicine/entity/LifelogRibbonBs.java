@@ -3,6 +3,8 @@ package com.telemedicine.rest.telemedicine.entity;
 import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Data
@@ -20,4 +22,5 @@ public class LifelogRibbonBs {
     public String   appVersion;
     public String   firmware;
     public String   regDt;
+
 }

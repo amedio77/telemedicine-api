@@ -11,6 +11,7 @@ public  class MemberInfo {
 
 	@Id
     private String userId;
+
     private String 	pass;
 	private String 	name;
 	private String 	Birth;

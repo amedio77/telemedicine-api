@@ -1,6 +1,8 @@
 package com.telemedicine.rest.telemedicine.entity;
 
 import lombok.Data;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -9,7 +11,7 @@ import javax.persistence.Id;
 public class LifelogCroiseActivity {
 
     @Id
-    private int     seqNo;
+    private int    seqNo;
 
     private String  userId;
     private String  modeType;
@@ -17,7 +19,10 @@ public class LifelogCroiseActivity {
     private int     walkCnt;
     private float   moveDistance;
     private int     calorie;
+
+    @Column(name = "act_time", updatable = false, insertable = false, nullable = true)
     private int     actTime;
+
     private String  startTime;
     private String  endTime;
     private String  appVersion;
