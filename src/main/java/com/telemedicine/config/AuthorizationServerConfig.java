@@ -46,7 +46,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clients.inMemory()
                 .withClient("crmClient1")
                 .secret(password)
-                .authorizedGrantTypes("password", "refresh_token")
+                .authorizedGrantTypes("password", "password", "authorization_code", "refresh_token")
                 .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
                 .scopes("read", "write", "trust")
                 //.accessTokenValiditySeconds(ONE_DAY)
@@ -56,8 +56,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .withClient("crmClient-redirect")
                 .secret(password)
                 .authorizedGrantTypes("authorization_code")
-                .authorities("ROLE_CLIENT") .scopes("read", "trust")
-                .resourceIds("sparklr")
+                .authorities("ROLE_CLIENT")
+                .scopes("read", "trust")
+                //.resourceIds("sparklr")
                 .redirectUris("http://localhost:8080");
 
     }
