@@ -1,7 +1,7 @@
 package com.telemedicine.config;
 
 
-import com.telemedicine.member.entity.MemberInfo;
+import com.telemedicine.user.entity.UserInfo;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +21,7 @@ public class CrmUserDetails implements UserDetails {
     private String password;
     private String userid;
 
-    public CrmUserDetails(MemberInfo user) {
+    public CrmUserDetails(UserInfo user) {
         this.userid = user.getUserId();
         this.password = user.getPass();
 

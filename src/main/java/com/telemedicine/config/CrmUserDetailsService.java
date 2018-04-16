@@ -1,7 +1,7 @@
 package com.telemedicine.config;
 
-import com.telemedicine.member.entity.MemberInfo;
-import com.telemedicine.member.repository.MemberInfoRepository;
+import com.telemedicine.user.entity.UserInfo;
+import com.telemedicine.user.repositoty.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,7 +22,7 @@ public class CrmUserDetailsService implements UserDetailsService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private MemberInfoRepository memberInfoRepository;
+    private UserInfoRepository userInfoRepository;
 
     @Bean
     public BCryptPasswordEncoder encoder(){
@@ -32,22 +32,22 @@ public class CrmUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-       List<MemberInfo> userList = memberInfoRepository.findByUserId(userId);
+       List<UserInfo> userList = userInfoRepository.findByUserId(userId);
         if(userList == null || userList.size() == 0){
             throw new UsernameNotFoundException("userId "+userId+" not found");
         }
 
-        MemberInfo memberInfoResult = null;
+        UserInfo userInfoResult = null;
 
-        for (MemberInfo memberInfo : userList) {
+        for (UserInfo userInfo : userList) {
             //logger.debug("loadUserByUsername="+memberInfo.getPass());
-            memberInfoResult = memberInfo;
+            userInfoResult = userInfo;
         };
 
-        String password = encoder().encode(memberInfoResult.getPass());
-        memberInfoResult.setPass(password);
+        String password = encoder().encode(userInfoResult.getPass());
+        userInfoResult.setPass(password);
 
-        return new CrmUserDetails(memberInfoResult);
+        return new CrmUserDetails(userInfoResult);
     }
 
 }

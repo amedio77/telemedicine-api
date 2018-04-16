@@ -11,7 +11,7 @@ import java.util.List;
 
 @RepositoryRestResource(collectionResourceRel = "lifelogbb", path = "lifelogbb")
 public interface LifelogBoryungBpRepository extends PagingAndSortingRepository<LifelogBoryungBp, String> {
-
+/*
     @Query(value="select          SEQ_NO,\n" +
             "         USER_ID ,\n" +
             "         MODE_TYPE ,\n" +
@@ -22,6 +22,7 @@ public interface LifelogBoryungBpRepository extends PagingAndSortingRepository<L
             "         APP_VERSION ,\n" +
             "         FIRMWARE ,\n" +
             "         REG_DT from lifelog_boryung_bp", nativeQuery=true)
+*/
     List<LifelogBoryungBp> findByUserId(@Param("userid") String userid);
 }
 

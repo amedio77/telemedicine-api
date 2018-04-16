@@ -1,4 +1,4 @@
-package com.telemedicine.member.controller;
+package com.telemedicine.user.controller;
 
 
 import org.slf4j.Logger;

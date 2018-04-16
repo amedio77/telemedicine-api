@@ -1,6 +1,6 @@
 package com.telemedicine.config;
 
-import com.telemedicine.member.entity.MemberInfo;
+import com.telemedicine.api.entity.MemberInfo;
 import com.telemedicine.api.entity.TelemedicineList;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;

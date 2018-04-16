@@ -1,7 +1,7 @@
-package com.telemedicine.member.repository;
+package com.telemedicine.api.repository;
 
 
-import com.telemedicine.member.entity.MemberInfo;
+import com.telemedicine.api.entity.MemberInfo;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
