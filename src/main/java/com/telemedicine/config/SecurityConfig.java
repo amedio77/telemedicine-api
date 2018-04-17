@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.approval.ApprovalStore;
@@ -63,24 +64,44 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     protected void configure(HttpSecurity http) throws Exception {
 
-        http    .cors().and()
+        http    //.cors().and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                //.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                //.antMatchers("/about").permitAll()
-                .antMatchers("/").permitAll()
+                //.antMatchers("/").permitAll()
+                .antMatchers("/img/**").permitAll()
+                //.antMatchers("/test/**").permitAll()
+                .antMatchers("/login/**").permitAll()
                 .antMatchers("/*.js").permitAll()
                 .antMatchers("/*.css").permitAll()
                 .antMatchers("/favicon.ico").permitAll()
                 .antMatchers("/oauth/token").permitAll()
                 .antMatchers("/oauth/authorize").permitAll()
-                .antMatchers("/api/**").authenticated()
+                //.antMatchers("/api/**").authenticated()
+                //.antMatchers("/user/**").authenticated()
+                //.antMatchers("/test/**").authenticated()
                 .antMatchers("/api/**").hasRole("USER")
-                .anyRequest().authenticated().and()
-                .httpBasic()
-                .realmName("CRM_REALM");
+                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/test/**").hasRole("USER")
+                .anyRequest().authenticated()
+                //.and().httpBasic().realmName("CRM_REALM")
+                .and().formLogin().loginPage("/login/index.html")
+                .loginProcessingUrl("/signin")
+                /*
+                .successHandler((req,res,auth)->{    //Success handler invoked after successful authentication
+                    for (GrantedAuthority authority : auth.getAuthorities()) {
+                        System.out.println(authority.getAuthority());
+                    }
+                    System.out.println(auth.getName());
+                    res.sendRedirect("/test"); // Redirect user to index/home page
+                })
+                */
+                .usernameParameter("userid").passwordParameter("password")
+                .and().formLogin().defaultSuccessUrl("/test")
+                .and().exceptionHandling().accessDeniedPage("/login/index.html")
+                .and().csrf().disable();
 
     }
 
